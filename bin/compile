@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+mkdir -p "$1/bin/"
+cp -a binaries-$STACK/* "$1/bin/"
+show_version=$(LD_LIBRARY_PATH=$1/bin $1/bin/pdftk --version 2>&1 | tr '\n' ' ' )
+echo "-----> heroku-pdftk-buildpack: Installed to app/bin. ${show_version}"
+
+exit 0

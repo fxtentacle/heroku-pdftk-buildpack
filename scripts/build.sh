@@ -38,7 +38,7 @@ echo "Compiling"
 	
 	make -f Makefile.Debian 
 
-	zip -9 $temp_dir/pdftk.zip `pwd`/pdftk /app/.apt/usr/lib/x86_64-linux-gnu/libgcj.so.14
+	zip -9 /tmp/pdftk.zip `pwd`/pdftk /app/.apt/usr/lib/x86_64-linux-gnu/libgcj.so.14
 )
 
 while true

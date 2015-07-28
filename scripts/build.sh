@@ -30,6 +30,7 @@ echo "Compiling"
 	
 	sed -i.bak s/VERSUFF=-4.6/VERSUFF=-4.8/g Makefile.Debian 
 	sed -i.bak s/\\/usr\\/share\\/java/~usr\\/share\\/java/g Makefile.Debian 
+	export CPATH=/app/.apt/usr/include/c++/4.8:`pwd`/../java
 	
 	make -f Makefile.Debian 
 

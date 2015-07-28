@@ -8,6 +8,8 @@ Custom buildpack that will install pdftk into /app/bin on Heroku. Supports cedar
 
 # How to upgrade PDFTK
 
+Update the tarball_url line in scripts/build.sh
+
 `heroku create`
 
 `heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-apt`

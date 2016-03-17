@@ -2,9 +2,20 @@
 
 set -e
 
-mkdir -p "$1/bin/"
-cp -a binaries-$STACK/* "$1/bin/"
-show_version=$(LD_LIBRARY_PATH=$1/bin $1/bin/pdftk --version 2>&1 | tr '\n' ' ' )
-echo "-----> heroku-pdftk-buildpack: Installed to app/bin. ${show_version}"
+BUILD_DIR=$1
+INSTALL_DIR="$1/vendor/pdftk"
+
+mkdir -p $INSTALL_DIR
+cp -a binaries-$STACK/* $INSTALL_DIR
+
+PROFILE_PATH="$BUILD_DIR/.profile.d/pdftk.sh"
+ACTUAL_INSTALL_PATH="$HOME/vendor/pdftk"
+mkdir -p $(dirname $PROFILE_PATH)
+echo "export PATH=$ACTUAL_INSTALL_PATH:\$PATH" >> $PROFILE_PATH
+echo "export LD_LIBRARY_PATH=$ACTUAL_INSTALL_PATH:\$LD_LIBRARY_PATH" >> $PROFILE_PATH
+
+sh $PROFILE_PATH
+show_version=$(LD_LIBRARY_PATH=$INSTALL_DIR $INSTALL_DIR/pdftk --version 2>&1 | tr '\n' ' ' )
+echo "-----> heroku-pdftk-buildpack: Installed to ${ACTUAL_INSTALL_PATH}. ${show_version}"
 
 exit 0

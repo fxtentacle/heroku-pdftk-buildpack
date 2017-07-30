@@ -2,6 +2,9 @@
 
 set -e
 
+mkdir -p "$1/.profile.d/"
+cp .profile.d/heroku-pdftk-buildpack-defaults.sh "$1/.profile.d/"
+
 mkdir -p "$1/bin/"
 cp -a binaries-$STACK/* "$1/bin/"
 show_version=$(LD_LIBRARY_PATH=$1/bin $1/bin/pdftk --version 2>&1 | tr '\n' ' ' )

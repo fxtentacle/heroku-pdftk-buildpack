@@ -15,7 +15,7 @@ Update the tarball_url line in scripts/build.sh
 
 `git push heroku master`
 
-Now you'll have a new Heroku app on the default stack (currently cedar-14) that runs the `scrupts/build.sh` script in this buildpack. That script will download the most recent PDFTK source and configure it with default options.
+Now you'll have a new Heroku app on the default stack (currently cedar-14) that runs the `scripts/build.sh` script in this buildpack. That script will download the most recent PDFTK source and configure it with default options.
 
 Use `heroku logs -t` to see when compilation is done. It'll start showing dots..
 

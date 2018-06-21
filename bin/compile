@@ -10,7 +10,7 @@ echo "-----> heroku-pdftk-buildpack: Installed to app/bin. ${show_version}"
 # Setting environment variables in .profile.d script (sourced at dyno startup)
 mkdir -p "$1/.profile.d/"
 cat <<EOF >"$1"/.profile.d/pdftk.sh
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/bin
+export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:\$HOME/bin"
 EOF
 
 exit 0

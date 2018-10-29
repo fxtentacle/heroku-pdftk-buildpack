@@ -1,4 +1,4 @@
-Custom buildpack that will install pdftk into /app/bin on Heroku. Supports cedar-14 and heroku-16.
+Custom buildpack that will install pdftk into /app/bin on Heroku. Supports cedar-14, heroku-16, and heroku-18.
 
 # How to use
 

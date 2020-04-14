@@ -25,6 +25,7 @@ https://launchpad.net/ubuntu/bionic/amd64/libecj-java-gcj/3.11.1-2
 # How to use
 
 1. Add this buildpack to your app. 
+2. Add the libgcj.so.* to your search path: `heroku config:set LD_LIBRARY_PATH=/app/bin`
 3. Use /app/bin/pdftk. BTW, the default PATH includes /app/bin, so this might happen automatically.
 
 # How to upgrade PDFTK
@@ -45,6 +46,6 @@ Use `heroku logs -t` to see when compilation is done. It'll start showing dots..
 
 1. Download the generated pdftk.zip
 2. Chmod +x them
-3. put them into `bin/$STACK/` into this buildpack. $STACK shall be the name of your stack as given in the Heroku $STACK variable.
+3. put them into `binaries-$STACK/` into this buildpack. $STACK shall be the name of your stack as given in the Heroku $STACK variable.
 
 `heroku ps:scale web=0` to turn off the dyno.

@@ -15,11 +15,11 @@ curl -L $tarball_url > t.zip
 unzip t.zip 
 
 echo "Patching GCJ to work"
-cp /app/.apt/usr/bin/gcj-4.8 /app/.apt/usr/bin/gcj-4.8-orig 
-sed -i.bak s/\\/usr\\/share\\/java\\/libgcj-4.8.jar/~usr\\/share\\/java\\/libgcj-4.8.jar/g /app/.apt/usr/bin/gcj-4.8
+cp /app/.apt/usr/bin/gcj-6 /app/.apt/usr/bin/gcj-6-orig 
+sed -i.bak s/\\/usr\\/share\\/java\\/libgcj-6.4.0.jar/~usr\\/share\\/java\\/libgcj-6.4.0.jar/g /app/.apt/usr/bin/gcj-6
 
-cp /app/.apt/usr/bin/../lib/gcc/x86_64-linux-gnu/4.8/ecj1 /app/.apt/usr/bin/../lib/gcc/x86_64-linux-gnu/4.8/ecj1-orig
-sed -i.bak s/\\/usr\\/share\\/java/~usr\\/share\\/java/g /app/.apt/usr/bin/../lib/gcc/x86_64-linux-gnu/4.8/ecj1
+cp /app/.apt/usr/bin/../lib/gcc/x86_64-linux-gnu/6.5.0/ecj1 /app/.apt/usr/bin/../lib/gcc/x86_64-linux-gnu/6.5.0/ecj1-orig
+sed -i.bak s/\\/usr\\/share\\/java/~usr\\/share\\/java/g /app/.apt/usr/bin/../lib/gcc/x86_64-linux-gnu/6.5.0/ecj1
 
 
 echo "Compiling"
@@ -30,15 +30,20 @@ echo "Compiling"
 	cd ..
 	cd pdftk
 	ln -s /app/.apt/usr/ ~usr
-
 	
-	sed -i.bak s/VERSUFF=-4.6/VERSUFF=-4.8/g Makefile.Debian 
+  sed -i.bak s/\\/usr\\/lib/~usr\\/lib/g ./~usr/lib/x86_64-linux-gnu/libm.so
+  sed -i.bak s/\\/usr\\/lib/~usr\\/lib/g ./~usr/lib/x86_64-linux-gnu/libc.so
+	
+	sed -i.bak s/VERSUFF=-4.6/VERSUFF=-6/g Makefile.Debian 
 	sed -i.bak s/\\/usr\\/share\\/java/~usr\\/share\\/java/g Makefile.Debian 
-	export CPATH=/app/.apt/usr/include/c++/4.8:`pwd`/../java
+	sed -i.bak "s/CXXFLAGS=/CXXFLAGS= -I\\/app\\/.apt\\/usr\\/include\\/c++\\/6\\/ -idirafter\\/app\\/.apt\\/usr\\/include -I\\/app\\/.apt\\/usr\\/include\\/x86_64-linux-gnu /g" Makefile.Debian 
+	
+	export CPATH=/app/.apt/usr/include/c++/6:`pwd`/../java
+	export LD_LIBRARY_PATH=/app/.apt/usr/lib:/app/.apt/usr/lib/x86_64-linux-gnu
 	
 	make -f Makefile.Debian 
 
-	zip -9 /tmp/pdftk.zip `pwd`/pdftk /app/.apt/usr/lib/x86_64-linux-gnu/libgcj.so.14
+	zip -9 /tmp/pdftk.zip `pwd`/pdftk /app/.apt/usr/lib/x86_64-linux-gnu/libgcj.so.17
 )
 
 while true

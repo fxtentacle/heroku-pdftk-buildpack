@@ -24,3 +24,4 @@ libxrandr2
 libxrender1
 libxtst6
 g++-6
+linux-libc-dev

@@ -5,7 +5,7 @@ temp_dir=$(mktemp -d /tmp/compile.XXXXXXXXXX)
 
 echo "Serving files from /tmp on $PORT"
 cd /tmp
-python -m http.server $PORT &
+python -m SimpleHTTPServer $PORT &
 
 cd $temp_dir
 echo "Temp dir: $temp_dir"

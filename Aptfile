@@ -10,7 +10,7 @@ zlib1g-dev
 python
 java-common
 libgcc1
-libisl19
+libisl23
 libmpc3
 libmpfr6
 libcairo2
